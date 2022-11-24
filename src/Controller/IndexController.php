@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Exception;
+
 class IndexController extends AbstractController
 {
     public function index()
@@ -11,4 +13,10 @@ class IndexController extends AbstractController
             'status' => 'ok',
         ]);
     }
+
+    public function unauthorized()
+    {
+        throw new Exception('unauthorized');
+    }
+
 }

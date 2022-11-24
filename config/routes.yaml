@@ -5,3 +5,6 @@
 index:
     path: /
     controller: App\Controller\IndexController::index
+unauthorized:
+    path: /api/unauthorized
+    controller: App\Controller\IndexController::unauthorized
