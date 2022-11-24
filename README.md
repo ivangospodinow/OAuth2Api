@@ -6,7 +6,7 @@ composer run-script localhost-backend
 
 # Api development plan
 - [x] Have fun, it is a new project :)
-- [ ] Install Symfony, crate hello world
+- [X] Install Symfony, crate hello world
 - [ ] Install LexikJWTAuthenticationBundle, get to know the plugin, configure
 - [ ] Create project structure
 - [ ] Implement Service Locator and factory (library already provides it)
