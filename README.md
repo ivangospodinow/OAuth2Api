@@ -1,3 +1,9 @@
+# Commands
+```sh
+# run localhost server
+composer run-script localhost-backend
+```
+
 # Api development plan
 - [x] Have fun, it is a new project :)
 - [ ] Install Symfony, crate hello world
