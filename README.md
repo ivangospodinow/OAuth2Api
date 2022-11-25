@@ -10,7 +10,7 @@ composer run-script localhost-backend
 - [X] Install LexikJWTAuthenticationBundle, get to know the plugin, configure
 - [X] Create project structure
 - [ ] Implement Service Locator and factory (library already provides it)
-- [ ] Database - custom ORM ot top of PDO, Entity / Repo, maybe some database migration tool?
+- [X] Database - custom ORM ot top of PDO, Entity / Repo, maybe some database migration tool?
 - [ ] Api Controller
 - [ ] Users Controller
 - [ ] Projects Controller
