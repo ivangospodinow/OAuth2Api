@@ -15,7 +15,7 @@ composer run-script localhost-backend
 - [ ] Users Controller
 - [ ] Projects Controller
 - [ ] Tasks Controller
-- [ ] Token generation and Authorisation
+- [X] Token generation and Authorisation
 - [ ] Recheck each point
 - [ ] Reliase
 
