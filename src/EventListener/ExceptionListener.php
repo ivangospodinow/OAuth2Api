@@ -13,7 +13,7 @@ class ExceptionListener
         $exception = $event->getThrowable();
         $response = new JsonResponse([
             'error' => $exception->getMessage(),
-            'code' => $exception->getStatusCode(),
+            'code' => method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500,
         ], 200);
 
         $event->setResponse($response);
