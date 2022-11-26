@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true,
+            "minLength": 36,
+            "maxLength": 36,
+            "description": "Project id",
+            "format": "uuid"
+        },
+        "title": {
+            "type": "string",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Project title"
+        },
+        "description": {
+            "type": "string",
+            "optional": true,
+            "minLength": 0,
+            "description": "Project content"
+        },
+        "status": {
+            "type": "string",
+            "optional": true,
+            "enum": [
+                "not_started",
+                "pending",
+                "active",
+                "done"
+            ],
+            "description": "Project status"
+        },
+        "duration": {
+            "type": "string",
+            "required": true,
+            "description": "Project duration interval"
+        },
+        "client": {
+            "type": "string",
+            "optional": true,
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Project client name"
+        },
+        "company": {
+            "type": "string",
+            "optional": true,
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Project company name"
+        }
+    },
+    "anyOf": [
+        {
+            "required": [
+                "client"
+            ]
+        },
+        {
+            "required": [
+                "company"
+            ]
+        }
+    ]
+}

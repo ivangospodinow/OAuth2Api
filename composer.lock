@@ -4,8 +4,83 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84df7358ba5013e2cb8f7a4eab3e740a",
+    "content-hash": "ac588d09748da8f3595c08ca30082d5e",
     "packages": [
+        {
+            "name": "andanteproject/soft-deletable-bundle",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/andanteproject/soft-deletable-bundle.git",
+                "reference": "5e5a048e10d680477e894aa77cb57c1756504e8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/andanteproject/soft-deletable-bundle/zipball/5e5a048e10d680477e894aa77cb57c1756504e8c",
+                "reference": "5e5a048e10d680477e894aa77cb57c1756504e8c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.13 || ^3.0",
+                "doctrine/event-manager": "^1.0",
+                "php": "^7.4 || ^8.0",
+                "symfony/framework-bundle": "^4.4 | ^5.0 | ^6.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^2.2",
+                "doctrine/orm": "^2.6.3",
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^3.4",
+                "phpspec/prophecy": "^1.15",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-symfony": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "roave/security-advisories": "dev-master",
+                "symfony/yaml": "^4.0 | ^5.0 | ^6.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Andante\\SoftDeletableBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andante Project",
+                    "homepage": "https://github.com/andanteproject"
+                },
+                {
+                    "name": "Cristoforo Cervino",
+                    "homepage": "https://github.com/cristoforocervino"
+                },
+                {
+                    "name": "Luca Cividini",
+                    "homepage": "https://github.com/lucacividini"
+                }
+            ],
+            "description": "A Symfony Bundle to handle soft deletable with Doctrine Entities",
+            "keywords": [
+                "PHP7",
+                "doctrine",
+                "doctrine-orm",
+                "php",
+                "php74",
+                "soft-delete",
+                "symfony",
+                "symfony-bundle"
+            ],
+            "support": {
+                "issues": "https://github.com/andanteproject/soft-deletable-bundle/issues",
+                "source": "https://github.com/andanteproject/soft-deletable-bundle/tree/1.2.0"
+            },
+            "time": "2021-12-13T14:16:07+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "1.13.3",
@@ -1457,6 +1532,76 @@
                 }
             ],
             "time": "2022-10-17T19:48:16+00:00"
+        },
+        {
+            "name": "justinrainbow/json-schema",
+            "version": "5.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
+                "json-schema/json-schema-test-suite": "1.2.0",
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "bin": [
+                "bin/validate-json"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsonSchema\\": "src/JsonSchema/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bruno Prieto Reis",
+                    "email": "bruno.p.reis@gmail.com"
+                },
+                {
+                    "name": "Justin Rainbow",
+                    "email": "justin.rainbow@gmail.com"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Robert Schönthal",
+                    "email": "seroscho@googlemail.com"
+                }
+            ],
+            "description": "A library to validate a json schema.",
+            "homepage": "https://github.com/justinrainbow/json-schema",
+            "keywords": [
+                "json",
+                "schema"
+            ],
+            "support": {
+                "issues": "https://github.com/justinrainbow/json-schema/issues",
+                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
+            },
+            "time": "2022-04-13T08:02:27+00:00"
         },
         {
             "name": "laminas/laminas-code",

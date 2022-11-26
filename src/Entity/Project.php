@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use Andante\SoftDeletableBundle\SoftDeletable\SoftDeletableInterface;
+use Andante\SoftDeletableBundle\SoftDeletable\SoftDeletableTrait;
 use App\Repository\ProjectRepository;
+use App\Traits\EntityHydratorTrait;
+use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,8 +15,15 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
-class Project
+class Project implements SoftDeletableInterface
 {
+    use EntityHydratorTrait, SoftDeletableTrait;
+
+    const STATUS_NOT_STARTED = 'not_started';
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_DONE = 'done';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid", unique=true)
@@ -32,7 +43,7 @@ class Project
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=20)
      */
     private $status;
 
@@ -52,23 +63,29 @@ class Project
     private $company;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
-     */
-    private $deletedAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="tasks")
+     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="project")
      */
     private $tasks;
 
-    public function __construct()
+    public function __construct(array $props = [])
     {
         $this->tasks = new ArrayCollection();
+        $this->exchangeArray($props);
     }
 
-    public function getId(): ?int
+    public function exchangeArray(array $props): self
     {
-        return $this->id;
+        if (isset($props['duration']) && is_string($props['duration'])) {
+            $props['duration'] = new DateInterval($props['duration']);
+        }
+
+        $this->hydrateEntity($props);
+        return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return (string) $this->id;
     }
 
     public function getTitle(): ?string
@@ -100,8 +117,11 @@ class Project
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus($status): self
     {
+        if (!in_array($status, [self::STATUS_NOT_STARTED, self::STATUS_PENDING, self::STATUS_ACTIVE, self::STATUS_DONE])) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
         $this->status = $status;
 
         return $this;
@@ -139,18 +159,6 @@ class Project
     public function setCompany(?string $company): self
     {
         $this->company = $company;
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeImmutable
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
 
         return $this;
     }

@@ -9,11 +9,11 @@ composer run-script localhost-backend
 - [X] Install Symfony, crate hello world
 - [X] Install LexikJWTAuthenticationBundle, get to know the plugin, configure
 - [X] Create project structure
-- [ ] Implement Service Locator and factory (library already provides it)
+- [X] Implement Service Locator and factory (library already provides it)
 - [X] Database - custom ORM ot top of PDO, Entity / Repo, maybe some database migration tool?
-- [ ] Api Controller
+- [X] Api Controller
 - [ ] Users Controller
-- [ ] Projects Controller
+- [X] Projects Controller
 - [ ] Tasks Controller
 - [X] Token generation and Authorisation
 - [ ] Recheck each point

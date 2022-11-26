@@ -1,0 +1,49 @@
+{
+    "type": "object",
+    "properties": {
+        "list": {
+            "type": "object",
+            "optional": true,
+            "properties": {
+                "limit": {
+                    "type": "string",
+                    "optional": true,
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "Records limit"
+                },
+                "page": {
+                    "type": "string",
+                    "optional": true,
+                    "minimum": 1,
+                    "description": "Current list page"
+                }
+            }
+        },
+        "filter": {
+            "type": "object",
+            "optional": true,
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "optional": true,
+                    "minLength": 36,
+                    "maxLength": 36,
+                    "description": "Filter by project id",
+                    "format": "uuid"
+                },
+                "status": {
+                    "type": "string",
+                    "optional": true,
+                    "enum": [
+                        "not_started",
+                        "pending",
+                        "active",
+                        "done"
+                    ],
+                    "description": "Filter by project status"
+                }
+            }
+        }
+    }
+}

@@ -4,7 +4,7 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LoginControllerTest extends WebTestCase
+final class LoginControllerTest extends WebTestCase
 {
     public function testGetToken()
     {

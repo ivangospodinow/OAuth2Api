@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
+use App\Traits\EntityHydratorTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 
@@ -11,6 +12,8 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
  */
 class Task
 {
+    use EntityHydratorTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid", unique=true)
