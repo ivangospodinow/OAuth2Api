@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Andante\SoftDeletableBundle\SoftDeletable\SoftDeletableInterface;
+use Andante\SoftDeletableBundle\SoftDeletable\SoftDeletableTrait;
 use App\Repository\TaskRepository;
 use App\Traits\EntityHydratorTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,9 +12,9 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
  */
-class Task
+class Task implements SoftDeletableInterface
 {
-    use EntityHydratorTrait;
+    use EntityHydratorTrait, SoftDeletableTrait;
 
     /**
      * @ORM\Id
@@ -32,14 +34,20 @@ class Task
      */
     private $project;
 
-    /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
-     */
-    private $deletedAt;
-
-    public function getId(): ?int
+    public function __construct(array $props = [])
     {
-        return $this->id;
+        $this->exchangeArray($props);
+    }
+
+    public function exchangeArray(array $props): self
+    {
+        $this->hydrateEntity($props);
+        return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return (string) $this->id;
     }
 
     public function getProject(): ?Project
@@ -54,18 +62,6 @@ class Task
         return $this;
     }
 
-    public function getTasks(): ?Project
-    {
-        return $this->tasks;
-    }
-
-    public function setTasks(?Project $tasks): self
-    {
-        $this->tasks = $tasks;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -74,18 +70,6 @@ class Task
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeImmutable
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
 
         return $this;
     }

@@ -11,6 +11,11 @@ use Symfony\Component\Serializer\Serializer;
 
 abstract class AbstractController extends SymfonyAbstractController
 {
+    /**
+     * @var DateIntervalNormalizer
+     */
+    private $dateIntervalNormalizer;
+
     protected function createResponse(array $data): JsonResponse
     {
         if (isset($data['errors'])) {
@@ -22,7 +27,6 @@ abstract class AbstractController extends SymfonyAbstractController
 
     protected function normalizeEntityList($entities): array
     {
-        $dateIntervalNormalizer = new DateIntervalNormalizer();
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, [new JsonEncoder()]);
 
@@ -32,14 +36,25 @@ abstract class AbstractController extends SymfonyAbstractController
                 $entity,
                 null,
                 [
-                    'callbacks' => [
-                        'duration' => function ($value) use ($dateIntervalNormalizer) {
-                            return $dateIntervalNormalizer->normalize($value);
-                        },
-                    ],
+                    'callbacks' => $this->getNormalizeRules(),
                 ]
             );
         }
         return $list;
+    }
+
+    protected function getNormalizeRules()
+    {
+        return [
+
+        ];
+    }
+
+    protected function getDateIntervalNormalizer(): DateIntervalNormalizer
+    {
+        if (null === $this->dateIntervalNormalizer) {
+            $this->dateIntervalNormalizer = new DateIntervalNormalizer();
+        }
+        return $this->dateIntervalNormalizer;
     }
 }

@@ -9,6 +9,7 @@ index:
 unauthorized:
     path: /api/unauthorized
     controller: App\Controller\IndexController::unauthorized
+# project start
 project-get:
     path: /api/project
     methods: [GET]
@@ -25,3 +26,22 @@ project-delete:
     path: /api/project/{id}
     methods: [DELETE]
     controller: App\Controller\ProjectController::delete
+# project end
+# task start
+task-get:
+    path: /api/task
+    methods: [GET]
+    controller: App\Controller\TaskController::index
+task-create:
+    path: /api/task
+    methods: [POST]
+    controller: App\Controller\TaskController::create
+task-update:
+    path: /api/task/{id}
+    methods: [PUT]
+    controller: App\Controller\TaskController::update
+task-delete:
+    path: /api/task/{id}
+    methods: [DELETE]
+    controller: App\Controller\TaskController::delete
+# task end

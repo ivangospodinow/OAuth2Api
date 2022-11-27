@@ -3,7 +3,10 @@
 namespace App\Tests\Controller;
 
 use App\Controller\AbstractController;
+use App\Controller\ProjectController;
 use App\Entity\Project;
+use App\Repository\ProjectRepository;
+use App\Service\JsonSchemaValidator;
 use App\Tests\Traits\InvokeObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -57,6 +60,11 @@ final class AbstractControllerTest extends TestCase
 
     public function testGetNormalizeEntityList()
     {
+        $this->controller = new class($this->createMock(ProjectRepository::class), new JsonSchemaValidator()) extends ProjectController
+        {
+
+        };
+
         $expected = array(
             0 => array(
                 'id' => 'bb27ac1e-f042-471c-9f2a-0d5bcc4eafe3',
@@ -102,6 +110,7 @@ final class AbstractControllerTest extends TestCase
         ];
 
         $items = $this->invokeMethod($this->controller, 'normalizeEntityList', [$entities]);
+
         $this->assertSame($expected, $items);
     }
 }

@@ -11,6 +11,7 @@ class ExceptionListener
         $event->allowCustomResponseCode();
 
         $exception = $event->getThrowable();
+
         $response = new JsonResponse([
             'error' => $exception->getMessage(),
             'code' => method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500,

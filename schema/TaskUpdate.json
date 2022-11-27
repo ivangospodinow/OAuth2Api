@@ -1,0 +1,28 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true,
+            "minLength": 36,
+            "maxLength": 36,
+            "description": "Task id",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Task name"
+        },
+        "project": {
+            "type": "string",
+            "required": true,
+            "minLength": 36,
+            "maxLength": 36,
+            "description": "Project id",
+            "format": "uuid"
+        }
+    }
+}

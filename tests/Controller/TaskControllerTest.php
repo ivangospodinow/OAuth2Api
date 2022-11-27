@@ -2,9 +2,10 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\ProjectController;
-use App\Entity\Project;
+use App\Controller\TaskController;
+use App\Entity\Task;
 use App\Repository\ProjectRepository;
+use App\Repository\TaskRepository;
 use App\Service\JsonSchemaValidator;
 use App\Tests\Traits\EntityMocker;
 use App\Tests\Traits\InvokeObject;
@@ -13,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 
-final class ProjectControllerTest extends TestCase
+final class TaskControllerTest extends TestCase
 {
     use InvokeObject, EntityMocker;
 
@@ -26,6 +27,12 @@ final class ProjectControllerTest extends TestCase
      * @var MockObject
      */
     private $repo;
+
+    /**
+     * @var MockObject
+     */
+    private $projectRepo;
+
     private $controller;
 
     public function setUp(): void
@@ -33,15 +40,16 @@ final class ProjectControllerTest extends TestCase
         parent::setUp();
 
         $this->request = $this->createMock(Request::class);
-        $this->repo = $this->createMock(ProjectRepository::class);
-        $this->controller = new ProjectController($this->repo, new JsonSchemaValidator);
+        $this->repo = $this->createMock(TaskRepository::class);
+        $this->projectRepo = $this->createMock(ProjectRepository::class);
+        $this->controller = new TaskController($this->repo, $this->projectRepo, new JsonSchemaValidator);
     }
 
     public function testIndexActionNoParameters()
     {
         $entities = [
-            $this->createProjectMock(),
-            $this->createProjectMock(),
+            $this->createTaskMock(),
+            $this->createTaskMock(),
         ];
         $this->repo->method('findForList')->with([])->willReturn($entities);
         $response = $this->controller->index($this->request);
@@ -59,7 +67,7 @@ final class ProjectControllerTest extends TestCase
     public function testIndexActionSomeParameters()
     {
         $entities = [
-            $this->createProjectMock(),
+            $this->createTaskMock(),
         ];
         $this->request->query = new InputBag([
             'filter' => [
@@ -83,12 +91,13 @@ final class ProjectControllerTest extends TestCase
 
     public function testCreateAction()
     {
-        $post = $this->getProjectDataMock();
+        $post = $this->getTaskDataMock();
         unset($post['id']);
-        $project = new Project($post);
+        $task = new Task(array_merge($post, ['project' => $this->createProjectMock($post['project'])]));
 
         $this->request->method('getContent')->willReturn(json_encode($post));
-        $this->repo->method('save')->with($project, true);
+        $this->repo->method('save')->with($task, true);
+        $this->projectRepo->method('find')->with($post['project'])->willReturn($task->getProject());
 
         $response = $this->controller->create($this->request);
         $arrayReponse = json_decode($response->getContent(), true);
@@ -97,30 +106,32 @@ final class ProjectControllerTest extends TestCase
 
     public function testUpdateAction()
     {
-        $post = $this->getProjectDataMock();
-        $project = new Project($post);
+        $post = $this->getTaskDataMock();
+        $task = new Task(array_merge($post, ['project' => $this->createProjectMock($post['project'])]));
 
         $this->request->method('getContent')->willReturn(json_encode($post));
-        $this->repo->method('find')->with($post['id'])->willReturn($project);
-        $this->repo->method('save')->with($project, true);
+        $this->repo->method('find')->with($post['id'])->willReturn($task);
+        $this->repo->method('save')->with($task, true);
+        $this->projectRepo->method('find')->with($post['project'])->willReturn($task->getProject());
 
         $response = $this->controller->update($this->request, $post['id']);
         $arrayReponse = json_decode($response->getContent(), true);
+
         $this->assertArrayHasKey('id', $arrayReponse['data']);
     }
 
     public function testDeleteAction()
     {
-        $post = $this->getProjectDataMock();
-        $project = new Project($post);
+        $post = $this->getTaskDataMock();
+        $task = new Task(array_merge($post, ['project' => $this->createProjectMock($post['project'])]));
 
         $this->request->method('getContent')->willReturn(json_encode($post));
-        $this->repo->method('find')->with($post['id'])->willReturn($project);
-        $this->repo->method('save')->with($project, true);
+        $this->repo->method('find')->with($post['id'])->willReturn($task);
+        $this->repo->method('save')->with($task, true);
 
         $response = $this->controller->delete($post['id']);
         $arrayReponse = json_decode($response->getContent(), true);
         $this->assertTrue($arrayReponse['success']);
-        $this->assertInstanceOf(DateTimeImmutable::class, $project->getDeletedAt());
+        $this->assertInstanceOf(DateTimeImmutable::class, $task->getDeletedAt());
     }
 }

@@ -109,12 +109,22 @@ class ProjectController extends AbstractController
         }
 
         $project->setDeletedAt(new DateTimeImmutable());
-        $this->repo->remove($project, true);
+        $this->repo->save($project, true);
 
         return $this->createResponse([
-            'data' => [
-                'id' => $project->getId(),
-            ],
+            'success' => true,
         ]);
+    }
+
+    protected function getNormalizeRules()
+    {
+        return [
+            'duration' => function ($value) {
+                return $this->getDateIntervalNormalizer()->normalize($value);
+            },
+            'project' => function ($value) {
+                return null;
+            },
+        ];
     }
 }
