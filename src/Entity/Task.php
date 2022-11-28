@@ -25,7 +25,7 @@ class Task implements SoftDeletableInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=128)
      */
     private $name;
 
