@@ -25,5 +25,5 @@ services:
 
     App\EventListener\ExceptionListener:
         tags:
-            - { name: kernel.event_listener, event: kernel.exception }
-
+            - { name: kernel.event_listener, event: kernel.exception , method: onKernelException }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }

@@ -76,11 +76,12 @@
         ],
         "appinit": [
             "@composer install",
-            "@php bin/console lexik:jwt:generate-keypair",
-            "php bin/console --no-interaction doctrine:migrations:migrate"
+            "@php bin/console --no-interaction lexik:jwt:generate-keypair --skip-if-exists",
+            "@php bin/console --no-interaction doctrine:migrations:migrate"
         ],
-        "localhost-backend": "php -S 127.0.0.1:8888 -t public",
-        "tests": "php bin/phpunit"
+        "localhost-backend": "@php -S 127.0.0.1:8888 -t public",
+        "tests": "@php bin/phpunit",
+        "tests-localhost": "@php scripts/apitesting.php"
     },
     "conflict": {
         "symfony/symfony": "*"

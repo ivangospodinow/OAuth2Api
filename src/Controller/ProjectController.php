@@ -52,8 +52,7 @@ class ProjectController extends AbstractController
             $data['status'] = Project::STATUS_NOT_STARTED;
         }
 
-        $project = new Project();
-        $project->exchangeArray($data);
+        $project = new Project($data);
         $this->repo->save($project, true);
 
         return $this->createResponse([

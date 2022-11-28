@@ -89,7 +89,6 @@ class JsonSchemaValidator extends Validator
     {
         return new JsonResponse(
             [
-                'success' => false,
                 'errors' => $errors,
                 'code' => 422,
             ],

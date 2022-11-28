@@ -69,7 +69,7 @@ final class AbstractControllerTest extends TestCase
             0 => array(
                 'id' => 'bb27ac1e-f042-471c-9f2a-0d5bcc4eafe3',
                 'title' => 'Project #1',
-                'description' => null,
+                'description' => 'Description',
                 'status' => null,
                 'duration' => 'P0Y1M0DT0H0M0S',
                 'client' => 'My company',
@@ -81,7 +81,7 @@ final class AbstractControllerTest extends TestCase
             1 => array(
                 'id' => 'fb27ac1e-f042-471c-9f1a-0d5bcc3eafe3',
                 'title' => 'Project #2',
-                'description' => null,
+                'description' => 'Description of project 2',
                 'status' => null,
                 'duration' => 'P1Y0M0DT0H0M0S',
                 'client' => 'Unknown',
@@ -96,14 +96,14 @@ final class AbstractControllerTest extends TestCase
             new Project([
                 'id' => 'bb27ac1e-f042-471c-9f2a-0d5bcc4eafe3',
                 'title' => 'Project #1',
-                'content' => 'Content',
+                'description' => 'Description',
                 'duration' => 'P1M',
                 'client' => 'My company',
             ]),
             new Project([
                 'id' => 'fb27ac1e-f042-471c-9f1a-0d5bcc3eafe3',
                 'title' => 'Project #2',
-                'content' => 'Content of project 2',
+                'description' => 'Description of project 2',
                 'duration' => 'P1Y',
                 'client' => 'Unknown',
             ]),
