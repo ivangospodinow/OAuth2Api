@@ -79,10 +79,11 @@
             "@composer install",
             "@php scripts/appinit.php",
             "@php bin/console --no-interaction lexik:jwt:generate-keypair --skip-if-exists",
+            "@php bin/console --no-interaction doctrine:database:create --if-not-exists",
             "@php bin/console --no-interaction doctrine:migrations:migrate",
             "@php scripts/appinit_finish.php"
         ],
-        "localhost-backend": "@php -S 127.0.0.1:8888 -t public",
+        "localhost": "@php -S 127.0.0.1:8888 -t public",
         "tests": "@php bin/phpunit",
         "tests-localhost": "@php scripts/apitesting.php"
     },

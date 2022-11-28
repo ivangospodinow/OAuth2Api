@@ -1,7 +1,7 @@
 # Commands
 ```sh
 # run localhost server
-composer run-script localhost-backend
+composer run-script localhost
 ```
 
 # Api development plan

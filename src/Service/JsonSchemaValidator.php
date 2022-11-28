@@ -70,7 +70,11 @@ class JsonSchemaValidator extends Validator
         if ($request->isMethod('GET')) {
             return !empty($request->query->all()) ? json_decode(json_encode($request->query->all())) : new stdClass;
         }
-        return @json_decode($request->getContent()) ?: new stdClass;
+        $content = $request->getContent();
+        if (empty($content)) {
+            return new stdClass;
+        }
+        return json_decode($request->getContent());
     }
 
     /**
@@ -82,7 +86,7 @@ class JsonSchemaValidator extends Validator
         if ($request->isMethod('GET')) {
             return $request->query->all();
         }
-        return @json_decode($request->getContent(), true) ?: [];
+        return json_decode($request->getContent() ?: '[]', true) ?: [];
     }
 
     private function createErrorsResponse(array $errors): JsonResponse

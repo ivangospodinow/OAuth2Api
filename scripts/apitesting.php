@@ -16,7 +16,7 @@ $tester = new class
     {
         echo 'Testing Projects and Tasks by calling localhost instance of the api.' . PHP_EOL;
         if (false === $this->get('/')['status'] ?? false) {
-            echo 'Localhost api is not running. To start it use: `composer run-script localhost-backend`. Exiting...' . PHP_EOL;
+            echo 'Localhost api is not running. To start it use: `composer run-script localhost`. Exiting...' . PHP_EOL;
             exit;
         }
 
