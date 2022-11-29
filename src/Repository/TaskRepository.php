@@ -53,6 +53,7 @@ class TaskRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('t')
             ->join('t.project', 'project')
+            ->andWhere('t.deletedAt IS NULL')
             ->andWhere('project.deletedAt IS NULL')
             ->orderBy('t.id', 'DESC')
             ->setMaxResults($limit)
