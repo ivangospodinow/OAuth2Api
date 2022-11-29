@@ -1,8 +1,42 @@
-# Commands
+# Requirements
+- php >=7.4
+- mysql database
+- composer
+- git
+
+# Installation
 ```sh
-# run localhost server
+git clone https://github.com/ivangospodinow/OAuth2Api.git ./OAuth2Api
+cd OAuth2Api
+# change env variables as needed
+cp .env.local.example .env.local
+# will do composer install, database creation, migrations.
+composer run-script appinit
+# starts the backend server, timeout is 1 hour
+# http://127.0.0.1:8888
 composer run-script localhost
+````
+
+# Testing
+```sh
+# phpunit tests
+composer run-script tests
+# api consuming tests
+composer run-script tests-localhost
 ```
+
+## Commands
+```sh
+# will do composer install, database creation, migrations. 
+composer run-script appinit
+# starts the backend server, timeout is 1 hour
+# http://127.0.0.1:8888
+composer run-script localhost
+# phpunit tests
+composer run-script tests
+# api consuming tests
+composer run-script tests-localhost
+````
 
 # Api development plan
 - [x] Have fun, it is a new project :)
@@ -16,7 +50,7 @@ composer run-script localhost
 - [X] Projects Controller
 - [X] Tasks Controller
 - [X] Token generation and Authorisation
-- [ ] Recheck each point
+- [X] Recheck each point
 - [ ] Reliase
 
 # Api Task
